@@ -162,7 +162,7 @@ public class HumanController extends AbstractEntityController {
                             ((YggdrasilMinecraftSessionService) repo).getAuthenticationService(),
                             new GameProfile(UUID.fromString(realUUID), ""), true);
                 } catch (Exception e) {
-                    if (e.getMessage() != null && e.getMessage().contains("too many requests")) {
+                    if (e.getMessage() == null || e.getMessage().contains("too many requests")) {
                         SKIN_THREAD.delay();
                         SKIN_THREAD.addRunnable(this);
                     }

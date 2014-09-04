@@ -243,7 +243,7 @@ public class Citizens extends JavaPlugin implements CitizensPlugin {
 
         if (compatible) {
             saves.storeAll(npcRegistry);
-            saves.saveToDiskImmediate();
+            //saves.saveToDiskImmediate();
             despawnNPCs();
             npcRegistry = null;
         }
@@ -295,7 +295,7 @@ public class Citizens extends JavaPlugin implements CitizensPlugin {
                 saves.loadInto(npcRegistry);
                 Messaging.logTr(Messages.NUM_LOADED_NOTIFICATION, Iterables.size(npcRegistry), "?");
                 startMetrics();
-                scheduleSaveTask(Setting.SAVE_TASK_DELAY.asInt());
+                //scheduleSaveTask(Setting.SAVE_TASK_DELAY.asInt());
                 Bukkit.getPluginManager().callEvent(new CitizensEnableEvent());
             }
         }, 1) == -1) {
@@ -350,7 +350,7 @@ public class Citizens extends JavaPlugin implements CitizensPlugin {
         storedRegistries.remove(name);
     }
 
-    private void scheduleSaveTask(int delay) {
+    /*private void scheduleSaveTask(int delay) {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
@@ -358,7 +358,7 @@ public class Citizens extends JavaPlugin implements CitizensPlugin {
                 saves.saveToDisk();
             }
         }, delay, delay);
-    }
+    }*/
 
     private void setupEconomy() {
         try {
