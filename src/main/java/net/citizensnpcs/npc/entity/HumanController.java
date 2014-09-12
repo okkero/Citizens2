@@ -152,7 +152,7 @@ public class HumanController extends AbstractEntityController {
             if (cached != null) {
                 if (Messaging.isDebugging()) {
                     Messaging
-                    .debug("Using cached skin texture for NPC " + npc.getName() + " UUID " + npc.getUniqueId());
+                            .debug("Using cached skin texture for NPC " + npc.getName() + " UUID " + npc.getUniqueId());
                 }
                 skinProfile = new GameProfile(UUID.fromString(realUUID), "");
                 skinProfile.getProperties().put("textures", cached);
