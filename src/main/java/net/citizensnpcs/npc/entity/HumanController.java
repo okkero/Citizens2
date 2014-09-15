@@ -124,8 +124,8 @@ public class HumanController extends AbstractEntityController {
         private GameProfile fillProfileProperties(YggdrasilAuthenticationService auth, GameProfile profile,
                 boolean requireSecure) throws Exception {
             URL url = HttpAuthenticationService.constantURL(new StringBuilder()
-            .append("https://sessionserver.mojang.com/session/minecraft/profile/")
-            .append(UUIDTypeAdapter.fromUUID(profile.getId())).toString());
+                    .append("https://sessionserver.mojang.com/session/minecraft/profile/")
+                    .append(UUIDTypeAdapter.fromUUID(profile.getId())).toString());
             url = HttpAuthenticationService.concatenateURL(url,
                     new StringBuilder().append("unsigned=").append(!requireSecure).toString());
             MinecraftProfilePropertiesResponse response = (MinecraftProfilePropertiesResponse) MAKE_REQUEST.invoke(
@@ -162,7 +162,9 @@ public class HumanController extends AbstractEntityController {
                             ((YggdrasilMinecraftSessionService) repo).getAuthenticationService(),
                             new GameProfile(UUID.fromString(realUUID), ""), true);
                 } catch (Exception e) {
-                    if (e.getMessage() == null || e.getMessage().contains("too many requests")) {
+                    if ((e.getMessage() != null && e.getMessage().contains("too many requests"))
+                            || (e.getCause() != null && e.getCause().getMessage() != null && e.getCause().getMessage()
+                                    .contains("too many requests"))) {
                         SKIN_THREAD.delay();
                         SKIN_THREAD.addRunnable(this);
                     }
